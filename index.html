@@ -243,6 +243,8 @@
     <div class="ctrl-group">
       <label>Període</label>
       <select id="date-preset" onchange="applyPreset()">
+        <option value="today">Avui</option>
+        <option value="3d">Darrers 3 dies</option>
         <option value="7d">Darrers 7 dies</option>
         <option value="30d" selected>Darrers 30 dies</option>
         <option value="90d">Darrers 3 mesos</option>
@@ -368,7 +370,9 @@ function applyPreset() {
   const addDays = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
   let from, to = fmt(today);
 
-  if (preset === '7d')        { from = fmt(addDays(today, -6)); }
+  if (preset === 'today')     { from = fmt(today); }
+  else if (preset === '3d')   { from = fmt(addDays(today, -2)); }
+  else if (preset === '7d')   { from = fmt(addDays(today, -6)); }
   else if (preset === '30d')  { from = fmt(addDays(today, -29)); }
   else if (preset === '90d')  { from = fmt(addDays(today, -89)); }
   else if (preset === '180d') { from = fmt(addDays(today, -179)); }
